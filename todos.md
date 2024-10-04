@@ -1,0 +1,2 @@
+- [ ] do a global rate limit not ip based, makes no sense otherwise
+- [ ] adapt privacy policy to say that we're not saving anything
