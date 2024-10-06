@@ -29,6 +29,21 @@ const globalRateLimiters: Record<ModelId, Ratelimit> = Object.fromEntries(
 ) as Record<ModelId, Ratelimit>;
 
 export const rateLimit = async (identifier: string, model: ModelId) => {
+  const modelConfig = MODEL_CONFIG[model];
+
+  // If the model has no rate limit (userRateLimit is 0), return success immediately
+  if (modelConfig.userRateLimit === 0 && modelConfig.globalRateLimit === 0) {
+    return {
+      success: true,
+      limit: 0,
+      remaining: 0,
+      reset: 0,
+      globalLimit: 0,
+      globalRemaining: 0,
+      globalReset: 0,
+    };
+  }
+
   const modelLimiter = rateLimiters[model];
   const globalLimiter = globalRateLimiters[model];
 

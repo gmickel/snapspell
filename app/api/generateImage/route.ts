@@ -34,7 +34,11 @@ export async function POST(request: Request) {
   let remaining = 0;
 
   // Apply rate limiting if enabled and not a bypassed IP
-  if (ENABLE_RATE_LIMIT && !bypassIPs.includes(ip)) {
+  if (
+    ENABLE_RATE_LIMIT &&
+    !bypassIPs.includes(ip) &&
+    modelConfig.userRateLimit > 0
+  ) {
     const rateLimitResult = await rateLimit(ip, model as ModelId);
 
     if (!rateLimitResult.success) {
@@ -56,6 +60,11 @@ export async function POST(request: Request) {
     }
 
     ({ limit, reset, remaining } = rateLimitResult);
+  } else {
+    // Set default values for unlimited models
+    limit = 0;
+    reset = 0;
+    remaining = 0;
   }
 
   const startTime = Date.now();
@@ -74,11 +83,6 @@ export async function POST(request: Request) {
   if (height < 1 || height > 1024) {
     height = 1024;
   }
-
-  const modelID =
-    model === 'flux1.1-pro'
-      ? 'black-forest-labs/FLUX.1.1-pro'
-      : 'black-forest-labs/FLUX.1-schnell-Free';
 
   try {
     const response = await together.images.create({
