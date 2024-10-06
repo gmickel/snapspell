@@ -104,3 +104,21 @@ This project is protected by the MIT License - see the LICENSE scroll for detail
 ---
 
 Now go forth and create some AI masterpieces! Remember, even Merlin had to start somewhere! 🎨✨
+
+## 🧙‍♂️ Magical Stack (Our Sorcerer's Toolkit)
+
+SnapSpell harnesses the power of these mystical artifacts:
+
+- 🌪️ **Next.js 14**: Our enchanted foundation, providing the swiftest of spells for server-side rendering and magical routing.
+- 🎨 **Together AI**: The arcane engine behind our image conjuring, turning words into visual wonders.
+- 🔮 **shadcn/ui**: A treasure trove of pre-crafted UI components, allowing us to weave beautiful interfaces with ease.
+- ⚡ **Upstash**: Our ethereal vault for rate limiting, ensuring fair usage of magical resources across the realm.
+- 🌌 **FLUX Models by Black Forest Labs**: The mystical core of our image generation, crafting visual spells with unparalleled speed and quality.
+  - 🚀 **Flux 1.1 Pro**: Our most advanced conjuring engine, delivering swift and stunning results.
+  - 🌟 **Flux 1.0 Schnell**: The reliable classic, perfect for unlimited creative exploration.
+
+These powerful tools combine to create a seamless, responsive, and enchanting experience for all who dare to wield SnapSpell's power!
+
+---
+
+Now go forth and create some AI masterpieces! Remember, even Merlin had to start somewhere! 🎨✨
