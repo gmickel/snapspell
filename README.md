@@ -41,15 +41,33 @@ SnapSpell is your personal AI-powered image conjurer. Just type in a description
    - Duplicate `.env.template` and rename it to `.env` or `.env.local`
    - Fill in your arcane details (we'll guide you through the ritual)
 
-4. **Ignite your development crystal ball:**
+4. **Set up Together AI for image generation:**
+
+   - Sign up for an account at [Together AI](https://www.together.ai/)
+   - Navigate to your account settings or API section
+   - Generate a new API key
+   - Copy the API key and add it to your `.env` file as `TOGETHER_API_KEY`
+
+5. **[Optional] Set up Upstash for rate limiting:**
+
+   If you want to implement rate limiting:
+
+   - Sign up for a free account at [Upstash](https://upstash.com/)
+   - Create a new Redis database
+   - In your database details, find the "REST API" section
+   - Copy the `UPSTASH_REDIS_REST_URL` and `UPSTASH_REDIS_REST_TOKEN`
+   - Add these values to your `.env` file
+   - Set `ENABLE_RATE_LIMIT=true` in your `.env` file
+
+6. **Ignite your development crystal ball:**
 
    ```
    pnpm dev
    ```
 
-5. **Open your scrying mirror (browser) and navigate to `http://localhost:3000`**
+7. **Open your scrying mirror (browser) and navigate to `http://localhost:3000`**
 
-6. **Begin conjuring amazing images!**
+8. **Begin conjuring amazing images!**
 
 ## 🔑 Arcane Variables (The Secret Ingredients)
 
