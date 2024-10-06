@@ -5,8 +5,10 @@ import { ratelimit } from '@/lib/rateLimit';
 
 const together = new Together({ apiKey: process.env.TOGETHER_API_KEY });
 
-// Add this array of IP addresses to bypass rate limiting
-const bypassIPs = ['127.0.0.1', 'localhost', '212.51.150.247'];
+// Get the bypass IPs from the environment variable
+const bypassIPs = process.env.BYPASS_IPS
+  ? process.env.BYPASS_IPS.split(',')
+  : [];
 
 export async function POST(request: Request) {
   const params = await request.json();
@@ -70,7 +72,7 @@ export async function POST(request: Request) {
       prompt: prompt,
       width: width || 1024,
       height: height || 768,
-      steps: steps || 4,
+      steps: steps || 1,
       n: 1,
       response_format: 'b64_json',
       // biome-ignore lint/suspicious/noExplicitAny: library typings incorrect

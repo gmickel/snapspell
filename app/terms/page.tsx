@@ -4,7 +4,7 @@ const TermsOfService: React.FC = () => {
   return (
     <div className="container mx-auto px-4 py-8">
       <h1 className="text-3xl font-bold mb-6">Terms of Service</h1>
-      <p className="mb-4">Last updated: [Current Date]</p>
+      <p className="mb-4">Last updated: 6th October 2024</p>
 
       <h2 className="text-2xl font-semibold mt-6 mb-3">
         1. Acceptance of Terms
@@ -19,7 +19,7 @@ const TermsOfService: React.FC = () => {
       </h2>
       <p>
         We provide an AI-powered image generation service using prompts provided
-        by users. The actual image generation is performed by Together.ai, a
+        by users. The actual image generation is performed by together.ai, a
         third-party service.
       </p>
 
@@ -66,14 +66,15 @@ const TermsOfService: React.FC = () => {
 
       <h2 className="text-2xl font-semibold mt-6 mb-3">8. Governing Law</h2>
       <p>
-        These terms are governed by the laws of [Your Jurisdiction], without
-        regard to its conflict of law provisions.
+        These terms are governed by the laws of{' '}
+        {process.env.NEXT_PUBLIC_LEGAL_JURISDICTION}, without regard to its
+        conflict of law provisions.
       </p>
 
       <h2 className="text-2xl font-semibold mt-6 mb-3">9. Contact</h2>
       <p>
-        If you have any questions about these terms, please contact us at [Your
-        Contact Email].
+        If you have any questions about these terms, please contact us at{' '}
+        {process.env.NEXT_PUBLIC_TERMS_CONTACT_EMAIL}.
       </p>
     </div>
   );

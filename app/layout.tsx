@@ -16,9 +16,8 @@ const geistMono = localFont({
 });
 
 export const metadata: Metadata = {
-  title: 'SnapSpell - AI-Powered Image Generation with Flux 1.1 Pro',
-  description:
-    'Transform your words into stunning visuals with SnapSpell, powered by Flux 1.1 Pro. Experience lightning-fast, high-quality AI image generation from text prompts.',
+  title: `${process.env.NEXT_PUBLIC_SITE_NAME} - AI-Powered Image Generation with Flux 1.1 Pro`,
+  description: process.env.NEXT_PUBLIC_SITE_DESCRIPTION,
   keywords: [
     'AI',
     'image generation',
@@ -30,33 +29,36 @@ export const metadata: Metadata = {
     'fast image generation',
     'high-quality AI images',
   ],
-  authors: [{ name: 'Gordon Mickel', url: 'https://mickel.tech' }],
-  creator: 'Gordon Mickel',
-  publisher: 'Gordon Mickel',
-  metadataBase: new URL('https://snapspell.ai'),
+  authors: [
+    {
+      name: process.env.NEXT_PUBLIC_AUTHOR_NAME,
+      url: process.env.NEXT_PUBLIC_AUTHOR_URL,
+    },
+  ],
+  creator: process.env.NEXT_PUBLIC_AUTHOR_NAME,
+  publisher: process.env.NEXT_PUBLIC_AUTHOR_NAME,
+  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || ''),
   openGraph: {
     type: 'website',
     locale: 'en_US',
-    url: 'https://snapspell.ai',
-    siteName: 'SnapSpell',
-    title: 'SnapSpell - AI-Powered Image Generation with Flux 1.1 Pro',
-    description:
-      'Experience lightning-fast, high-quality AI image generation with SnapSpell, powered by Flux 1.1 Pro.',
+    url: process.env.NEXT_PUBLIC_SITE_URL,
+    siteName: process.env.NEXT_PUBLIC_SITE_NAME,
+    title: `${process.env.NEXT_PUBLIC_SITE_NAME} - AI-Powered Image Generation with Flux 1.1 Pro`,
+    description: process.env.NEXT_PUBLIC_SITE_DESCRIPTION,
     images: [
       {
         url: '/og-image.png',
         width: 1200,
         height: 630,
-        alt: 'SnapSpell - AI-Powered Image Generation with Flux 1.1 Pro',
+        alt: `${process.env.NEXT_PUBLIC_SITE_NAME} - AI-Powered Image Generation with Flux 1.1 Pro`,
       },
     ],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'SnapSpell - AI-Powered Image Generation with Flux 1.1 Pro',
-    description:
-      'Experience lightning-fast, high-quality AI image generation with SnapSpell, powered by Flux 1.1 Pro.',
-    creator: '@gmickel',
+    title: `${process.env.NEXT_PUBLIC_SITE_NAME} - AI-Powered Image Generation with Flux 1.1 Pro`,
+    description: process.env.NEXT_PUBLIC_SITE_DESCRIPTION,
+    creator: process.env.NEXT_PUBLIC_AUTHOR_TWITTER,
     images: ['/twitter-image.png'],
   },
   robots: {
@@ -71,9 +73,9 @@ export const metadata: Metadata = {
     },
   },
   alternates: {
-    canonical: 'https://snapspell.ai',
+    canonical: process.env.NEXT_PUBLIC_SITE_URL,
     languages: {
-      'en-US': 'https://snapspell.ai',
+      'en-US': process.env.NEXT_PUBLIC_SITE_URL,
       // Add other language versions if available
     },
   },

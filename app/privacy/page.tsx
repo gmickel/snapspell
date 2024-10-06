@@ -4,7 +4,7 @@ const PrivacyPolicy: React.FC = () => {
   return (
     <div className="container mx-auto px-4 py-8">
       <h1 className="text-3xl font-bold mb-6">Privacy Policy</h1>
-      <p className="mb-4">Last updated: [Current Date]</p>
+      <p className="mb-4">Last updated: 6th October 2024</p>
 
       <h2 className="text-2xl font-semibold mt-6 mb-3">
         1. Information We Collect
@@ -27,7 +27,7 @@ const PrivacyPolicy: React.FC = () => {
       <h2 className="text-2xl font-semibold mt-6 mb-3">3. Image Generation</h2>
       <p>
         When you use our image generation feature, your prompt is sent to
-        Together.ai, our third-party image generation service. Together.ai
+        together.ai, our third-party image generation service. together.ai
         receives your prompt and returns the generated image. We do not store
         your prompts or the generated images on our servers.
       </p>
@@ -57,7 +57,7 @@ const PrivacyPolicy: React.FC = () => {
       <h2 className="text-2xl font-semibold mt-6 mb-3">7. Contact Us</h2>
       <p>
         If you have any questions about this privacy policy, please contact us
-        at [Your Contact Email].
+        at {process.env.NEXT_PUBLIC_PRIVACY_CONTACT_EMAIL}.
       </p>
     </div>
   );

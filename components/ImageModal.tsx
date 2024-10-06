@@ -1,16 +1,19 @@
+import type React from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { X, Download } from 'lucide-react';
+import { X, Download, RefreshCw } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import type { ImageItem } from '@/types';
 
 type ImageModalProps = {
   selectedImage: ImageItem | null;
   setSelectedImage: React.Dispatch<React.SetStateAction<ImageItem | null>>;
+  onRegenerateImage: (prompt: string) => void;
 };
 
 export default function ImageModal({
   selectedImage,
   setSelectedImage,
+  onRegenerateImage,
 }: ImageModalProps) {
   const handleDownload = (imageUrl: string, prompt: string) => {
     const base64Data = imageUrl.split(',')[1];
@@ -28,6 +31,13 @@ export default function ImageModal({
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
+  };
+
+  const handleRegenerate = () => {
+    if (selectedImage) {
+      onRegenerateImage(selectedImage.prompt);
+      setSelectedImage(null);
+    }
   };
 
   return (
@@ -65,14 +75,22 @@ export default function ImageModal({
               className="w-full h-auto rounded-lg mb-4"
             />
             <p className="mb-4">{selectedImage.prompt}</p>
-            <Button
-              onClick={() =>
-                handleDownload(selectedImage.url, selectedImage.prompt)
-              }
-              className="bg-purple-600 hover:bg-purple-700 text-white"
-            >
-              <Download className="h-4 w-4 mr-2" /> Download
-            </Button>
+            <div className="flex justify-between">
+              <Button
+                onClick={() =>
+                  handleDownload(selectedImage.url, selectedImage.prompt)
+                }
+                className="bg-purple-600 hover:bg-purple-700 text-white"
+              >
+                <Download className="h-4 w-4 mr-2" /> Download
+              </Button>
+              <Button
+                onClick={handleRegenerate}
+                className="bg-blue-600 hover:bg-blue-700 text-white"
+              >
+                <RefreshCw className="h-4 w-4 mr-2" /> Regenerate
+              </Button>
+            </div>
           </motion.div>
         </motion.div>
       )}

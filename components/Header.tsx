@@ -48,7 +48,7 @@ export default function Header({
         generation
       </p>
 
-      <div className="flex gap-4 mb-8">
+      <div className="flex gap-4 my-16">
         <Input
           ref={inputRef}
           type="text"

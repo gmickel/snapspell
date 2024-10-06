@@ -8,9 +8,14 @@ import type { ImageItem } from '@/types';
 type ImageGridProps = {
   images: ImageItem[];
   setImages: React.Dispatch<React.SetStateAction<ImageItem[]>>;
+  onRegenerateImage: (prompt: string) => void;
 };
 
-export default function ImageGrid({ images, setImages }: ImageGridProps) {
+export default function ImageGrid({
+  images,
+  setImages,
+  onRegenerateImage,
+}: ImageGridProps) {
   const [selectedImage, setSelectedImage] = useState<ImageItem | null>(null);
 
   return (
@@ -23,6 +28,14 @@ export default function ImageGrid({ images, setImages }: ImageGridProps) {
             onClick={() =>
               image.status === 'complete' && setSelectedImage(image)
             }
+            onKeyDown={(e) => {
+              if (e.key === 'Enter' || e.key === ' ') {
+                image.status === 'complete' && setSelectedImage(image);
+              }
+            }}
+            // biome-ignore lint/a11y/useSemanticElements: not a button
+            role="button"
+            tabIndex={0}
           >
             <motion.div
               layout
@@ -67,6 +80,7 @@ export default function ImageGrid({ images, setImages }: ImageGridProps) {
       <ImageModal
         selectedImage={selectedImage}
         setSelectedImage={setSelectedImage}
+        onRegenerateImage={onRegenerateImage}
       />
     </>
   );

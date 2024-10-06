@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useRef, useCallback, useEffect } from 'react';
+import { useState, useRef, useCallback } from 'react';
 import { useToast } from '@/hooks/use-toast';
 import Header from './Header';
 import ImageGrid from './ImageGrid';
@@ -14,18 +14,39 @@ export default function ImageGenerationApp() {
   const [images, setImages] = useState<ImageItem[]>([]);
   const [settings, setSettings] = useState<ImageSettings>({
     width: 1024,
-    height: 1024,
-    steps: 4,
+    height: 768,
+    steps: 1,
     model: 'flux1.1-pro',
   });
-  const [selectedRatio, setSelectedRatio] = useState('1:1');
+  const [selectedRatio, setSelectedRatio] = useState('4:3');
   const inputRef = useRef<HTMLInputElement>(null);
   const generationQueue = useRef<string[]>([]);
   const activeGenerations = useRef<Set<string>>(new Set());
-  const [typingTimeout, setTypingTimeout] = useState<NodeJS.Timeout | null>(
-    null,
-  );
   const { toast } = useToast();
+
+  const generateImage = useCallback(
+    async (prompt: string, settings: ImageSettings) => {
+      const response = await fetch('/api/generateImage', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ prompt, ...settings }),
+      });
+
+      if (!response.ok) {
+        const errorData = await response.json();
+        if (response.status === 429) {
+          throw new Error(
+            errorData.error ||
+              'Too many requests. Please try again later or switch to the free model.',
+          );
+        }
+        throw new Error(errorData.error || 'Failed to generate image');
+      }
+
+      return await response.json();
+    },
+    [],
+  );
 
   const processQueue = useCallback(() => {
     const startNewGeneration = async (prompt: string) => {
@@ -79,76 +100,79 @@ export default function ImageGenerationApp() {
         startNewGeneration(currentPrompt);
       }
     }
-  }, [settings, toast]);
+  }, [settings, toast, generateImage]);
 
   const addToQueue = useCallback(
-    (trimmedPrompt: string) => {
+    (trimmedPrompt: string, forceRegenerate = false) => {
       if (
-        !generationQueue.current.includes(trimmedPrompt) &&
-        !images.some((img) => img.prompt === trimmedPrompt)
+        forceRegenerate ||
+        (!generationQueue.current.includes(trimmedPrompt) &&
+          !images.some(
+            (img) =>
+              img.prompt === trimmedPrompt && img.status === 'generating',
+          ))
       ) {
         generationQueue.current.push(trimmedPrompt);
         processQueue();
       }
     },
-    [processQueue, images],
+    [images, processQueue],
   );
 
-  useEffect(() => {
-    if (!prompt.trim()) return;
+  const handleSelectRatio = useCallback(
+    (ratio: {
+      name: string;
+      width: number;
+      height: number;
+    }) => {
+      setSelectedRatio(ratio.name);
+      setSettings((prev) => ({
+        ...prev,
+        width: ratio.width,
+        height: ratio.height,
+      }));
+    },
+    [],
+  );
 
-    if (typingTimeout) {
-      clearTimeout(typingTimeout);
-    }
-
-    const newTimeout = setTimeout(() => {
-      const trimmedPrompt = prompt.trim();
-      const words = trimmedPrompt.split(/\s+/);
-
-      if (!prompt.endsWith(' ') && words.length > 0) {
-        addToQueue(trimmedPrompt);
-      }
-    }, 2000);
-
-    setTypingTimeout(newTimeout);
-
-    return () => {
-      if (newTimeout) {
-        clearTimeout(newTimeout);
-      }
-    };
-  }, [prompt, addToQueue]);
-
-  const handleSelectRatio = (ratio: {
-    name: string;
-    width: number;
-    height: number;
-  }) => {
-    setSelectedRatio(ratio.name);
-    setSettings((prev) => ({
-      ...prev,
-      width: ratio.width,
-      height: ratio.height,
-    }));
-  };
-
-  const handleTryItNow = () => {
+  const handleTryItNow = useCallback(() => {
     inputRef.current?.scrollIntoView({ behavior: 'smooth' });
     setTimeout(() => inputRef.current?.focus(), 500);
-  };
+  }, []);
 
-  const handlePromptSubmit = (submittedPrompt: string) => {
-    const trimmedPrompt = submittedPrompt.trim();
-    if (trimmedPrompt) {
-      addToQueue(trimmedPrompt);
-    }
-  };
+  const handlePromptSubmit = useCallback(
+    (submittedPrompt: string) => {
+      const trimmedPrompt = submittedPrompt.trim();
+      if (trimmedPrompt) {
+        addToQueue(trimmedPrompt, true); // Force regeneration on submit
+      }
+    },
+    [addToQueue],
+  );
+
+  const handleRegenerateImage = useCallback(
+    (prompt: string) => {
+      addToQueue(prompt, true); // Force regeneration
+    },
+    [addToQueue],
+  );
+
+  const handlePromptChange = useCallback(
+    (newPrompt: string) => {
+      setPrompt(newPrompt);
+      const words = newPrompt.trim().split(/\s+/);
+      if (words.length > 0 && newPrompt.endsWith(' ')) {
+        addToQueue(newPrompt.trim());
+      }
+    },
+    [addToQueue],
+  );
 
   return (
     <>
       <Header
         prompt={prompt}
-        setPrompt={setPrompt}
+        setPrompt={handlePromptChange}
         settings={settings}
         setSettings={setSettings}
         selectedRatio={selectedRatio}
@@ -159,29 +183,12 @@ export default function ImageGenerationApp() {
       {images.length === 0 ? (
         <IntroSection handleTryItNow={handleTryItNow} />
       ) : (
-        <ImageGrid images={images} setImages={setImages} />
+        <ImageGrid
+          images={images}
+          setImages={setImages}
+          onRegenerateImage={handleRegenerateImage}
+        />
       )}
     </>
   );
-}
-
-async function generateImage(prompt: string, settings: ImageSettings) {
-  const response = await fetch('/api/generateImage', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ prompt, ...settings }),
-  });
-
-  if (!response.ok) {
-    const errorData = await response.json();
-    if (response.status === 429) {
-      throw new Error(
-        errorData.error ||
-          'Too many requests. Please try again later or switch to the free model.',
-      );
-    }
-    throw new Error(errorData.error || 'Failed to generate image');
-  }
-
-  return await response.json();
 }

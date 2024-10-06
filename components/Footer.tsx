@@ -5,7 +5,8 @@ export default function Footer() {
         <div className="border-t border-gray-800 pt-6">
           <div className="flex flex-col md:flex-row justify-between items-center">
             <div className="text-sm text-gray-500 mb-4 md:mb-0">
-              &copy; {new Date().getFullYear()} SnapSpell. All rights reserved.
+              &copy; {new Date().getFullYear()}{' '}
+              {process.env.NEXT_PUBLIC_SITE_NAME}. All rights reserved.
             </div>
             <div className="text-sm text-gray-500 mb-4 md:mb-0">
               Powered by{' '}
@@ -46,11 +47,21 @@ export default function Footer() {
                 <li>
                   <a
                     target="_blank"
-                    href="https://x.com/gmickel"
+                    href={process.env.NEXT_PUBLIC_GITHUB_URL}
                     className="text-sm text-gray-500 hover:text-gray-300 transition-colors"
                     rel="noreferrer"
                   >
-                    Contact
+                    GitHub
+                  </a>
+                </li>
+                <li>
+                  <a
+                    target="_blank"
+                    href={process.env.NEXT_PUBLIC_TWITTER_URL}
+                    className="text-sm text-gray-500 hover:text-gray-300 transition-colors"
+                    rel="noreferrer"
+                  >
+                    Twitter
                   </a>
                 </li>
               </ul>
