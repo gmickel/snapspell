@@ -46,8 +46,18 @@ export default function IntroSection({ handleTryItNow }: IntroSectionProps) {
             5
           </span>
           <p>
-            The FLUX1.1 [pro] and FLUX1 [schnell] models are limited to 20
-            generations per day.
+            The FLUX1.1 [pro] and FLUX1 [schnell] models are limited to a very
+            low number of generations per day. Use the free FLUX1 [schnell] or
+            deploy your own{' '}
+            <a
+              href={process.env.NEXT_PUBLIC_GITHUB_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-purple-400 hover:text-purple-300"
+            >
+              SnapSpell instance
+            </a>{' '}
+            to bypass these limitations.
           </p>
         </li>
       </ol>
