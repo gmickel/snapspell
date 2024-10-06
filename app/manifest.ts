@@ -2,9 +2,9 @@ import type { MetadataRoute } from 'next';
 
 export default function manifest(): MetadataRoute.Manifest {
   return {
-    name: 'SnapSpell',
-    short_name: 'SnapSpell',
-    description: 'AI-Powered Image Generation with Flux 1.1 Pro',
+    name: process.env.NEXT_PUBLIC_SITE_NAME,
+    short_name: process.env.NEXT_PUBLIC_SITE_NAME,
+    description: process.env.NEXT_PUBLIC_SITE_DESCRIPTION,
     start_url: '/',
     display: 'standalone',
     background_color: '#11181d',
