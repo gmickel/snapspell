@@ -5,8 +5,8 @@ export default function Footer() {
         <div className="border-t border-gray-800 pt-6">
           <div className="flex flex-col md:flex-row justify-between items-center">
             <div className="text-sm text-gray-500 mb-4 md:mb-0">
-              &copy; {new Date().getFullYear()}{' '}
-              {process.env.NEXT_PUBLIC_SITE_NAME}. All rights reserved.
+              &copy; {new Date().getFullYear()} Mickel Tech. All rights
+              reserved.
             </div>
             <div className="text-sm text-gray-500 mb-4 md:mb-0">
               Powered by{' '}
