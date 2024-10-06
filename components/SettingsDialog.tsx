@@ -47,7 +47,7 @@ export default function SettingsDialog({
           <Settings className="h-4 w-4" />
         </Button>
       </DialogTrigger>
-      <DialogContent className="sm:max-w-[425px] bg-gray-900 text-white border-gray-800">
+      <DialogContent className="sm:max-w-[425px] bg-gray-900 text-white border-gray-800 max-h-[90vh] overflow-y-auto">
         <DialogHeader>
           <DialogTitle className="text-2xl font-bold">Settings</DialogTitle>
         </DialogHeader>
