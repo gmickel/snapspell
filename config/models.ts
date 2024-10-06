@@ -5,8 +5,8 @@ export const MODEL_CONFIG = {
     modelId: 'black-forest-labs/FLUX.1.1-pro',
     description:
       'FLUX1.1 [pro] provides six times faster generation than its predecessor FLUX.1 [pro] while also improving image quality, prompt adherence, and diversity.',
-    userRateLimit: 20, // per day
-    globalRateLimit: 100, // per day
+    userRateLimit: 10, // per day
+    globalRateLimit: 20, // per day
   },
   'FLUX.1-schnell': {
     id: 'FLUX.1-schnell',
@@ -14,8 +14,8 @@ export const MODEL_CONFIG = {
     modelId: 'black-forest-labs/FLUX.1-schnell',
     description:
       'FLUX.1 [schnell] is a 12 billion parameter rectified flow transformer capable of generating images from text descriptions.',
-    userRateLimit: 50, // per day
-    globalRateLimit: 1000, // per day
+    userRateLimit: 10, // per day
+    globalRateLimit: 100, // per day
   },
   'FLUX.1-schnell-Free': {
     id: 'FLUX.1-schnell-Free',
