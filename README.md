@@ -87,23 +87,7 @@ SnapSpell now comes with an optional rate limiting feature to maintain balance i
 - Add specific IP addresses to the `BYPASS_IPS` variable to grant them unlimited access.
 - For personal use or development, you can set `ENABLE_RATE_LIMIT=false` to remove all restrictions.
 
-Adjust the rate limits in `config.ts` to suit your needs:
-
-## 🤝 Join Our Coven of Contributors
-
-Got enchanting ideas? We love magical innovations! Consult our `CONTRIBUTING.md` scroll and let's weave some digital sorcery together!
-
-## 💖 Support Our Magical Endeavors
-
-If SnapSpell has enchanted you (and we're sure it will), consider offering a potion of gratitude or, perhaps, a new crystal ball. Check our `FUNDING.yml` for ways to support our magical research!
-
-## 📜 Magical License
-
-This project is protected by the MIT License - see the LICENSE scroll for details. In other words, spread the magic, but remember to credit the original spellcasters!
-
----
-
-Now go forth and create some AI masterpieces! Remember, even Merlin had to start somewhere! 🎨✨
+Adjust the rate limits in `config.ts` to suit your needs.
 
 ## 🧙‍♂️ Magical Stack (Our Sorcerer's Toolkit)
 
@@ -118,6 +102,18 @@ SnapSpell harnesses the power of these mystical artifacts:
   - 🌟 **Flux 1.0 Schnell**: The reliable classic, perfect for unlimited creative exploration.
 
 These powerful tools combine to create a seamless, responsive, and enchanting experience for all who dare to wield SnapSpell's power!
+
+## 🤝 Join Our Coven of Contributors
+
+Got enchanting ideas? We love magical innovations! Consult our `CONTRIBUTING.md` scroll and let's weave some digital sorcery together!
+
+## 💖 Support Our Magical Endeavors
+
+If SnapSpell has enchanted you (and we're sure it will), consider offering a potion of gratitude or, perhaps, a new crystal ball. Check our `FUNDING.yml` for ways to support our magical research!
+
+## 📜 Magical License
+
+This project is protected by the MIT License - see the LICENSE scroll for details. In other words, spread the magic, but remember to credit the original spellcasters!
 
 ---
 
