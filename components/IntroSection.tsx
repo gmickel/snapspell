@@ -22,8 +22,8 @@ export default function IntroSection({ handleTryItNow }: IntroSectionProps) {
             2
           </span>
           <p>
-            Images will be generated as you type or when you press enter or wait
-            for 5 seconds after typing
+            Images will be generated as you type after you type a space or press
+            enter
           </p>
         </li>
         <li className="flex items-center">
@@ -36,13 +36,19 @@ export default function IntroSection({ handleTryItNow }: IntroSectionProps) {
           <span className="flex-shrink-0 w-8 h-8 flex items-center justify-center bg-purple-600 rounded-full mr-3">
             4
           </span>
-          <p>Click on the generated image to view and download it</p>
+          <p>
+            Click on the generated image to view and download it or regenerate
+            it
+          </p>
         </li>
         <li className="flex items-center">
           <span className="flex-shrink-0 w-8 h-8 flex items-center justify-center bg-purple-600 rounded-full mr-3">
             5
           </span>
-          <p>The FLUX1.1 [pro] Model is limited to 20 generations per day.</p>
+          <p>
+            The FLUX1.1 [pro] and FLUX1 [schnell] models are limited to 20
+            generations per day.
+          </p>
         </li>
       </ol>
       <Button

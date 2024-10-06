@@ -4,7 +4,9 @@ const PrivacyPolicy: React.FC = () => {
   return (
     <div className="container mx-auto px-4 py-8">
       <h1 className="text-3xl font-bold mb-6">Privacy Policy</h1>
-      <p className="mb-4">Last updated: 6th October 2024</p>
+      <p className="mb-4">
+        Last updated: {process.env.NEXT_PUBLIC_PRIVACY_LAST_UPDATED}
+      </p>
 
       <h2 className="text-2xl font-semibold mt-6 mb-3">
         1. Information We Collect

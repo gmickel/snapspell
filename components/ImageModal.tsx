@@ -86,7 +86,7 @@ export default function ImageModal({
               </Button>
               <Button
                 onClick={handleRegenerate}
-                className="bg-blue-600 hover:bg-blue-700 text-white"
+                className="bg-purple-600 hover:bg-purple-700 text-white"
               >
                 <RefreshCw className="h-4 w-4 mr-2" /> Regenerate
               </Button>

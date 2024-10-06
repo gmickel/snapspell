@@ -1,7 +1,7 @@
 import type React from 'react';
 import { useState } from 'react';
 import { motion } from 'framer-motion';
-import { Settings, X, Check } from 'lucide-react';
+import { Settings, Check } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import {
   Dialog,
@@ -13,38 +13,17 @@ import {
 import { Label } from '@/components/ui/label';
 import { Slider } from '@/components/ui/slider';
 import { AspectRatioSelector } from '@/components/AspectRatioSelector';
-
-type ImageSettings = {
-  height: number;
-  width: number;
-  steps: number;
-  model: string;
-};
+import { MODEL_CONFIG, type ModelId } from '@/config/models';
+import type { ImageSettings, AspectRatio } from '@/types';
 
 type SettingsDialogProps = {
   settings: ImageSettings;
   setSettings: React.Dispatch<React.SetStateAction<ImageSettings>>;
   selectedRatio: string;
-  handleSelectRatio: (ratio: {
-    name: string;
-    width: number;
-    height: number;
-  }) => void;
+  handleSelectRatio: (ratio: AspectRatio) => void;
 };
 
-const modelOptions = [
-  {
-    id: 'flux1.1-pro',
-    name: 'FLUX1.1 [pro]',
-    description:
-      'Six times faster generation, improved quality. Limited to 20 generations per day per user.',
-  },
-  {
-    id: 'flux1-schnell',
-    name: 'FLUX.1 [schnell]',
-    description: '12 billion parameter model. Unlimited generations.',
-  },
-];
+const modelOptions = Object.values(MODEL_CONFIG);
 
 export default function SettingsDialog({
   settings,
@@ -53,6 +32,10 @@ export default function SettingsDialog({
   handleSelectRatio,
 }: SettingsDialogProps) {
   const [isOpen, setIsOpen] = useState(false);
+
+  const handleModelChange = (modelId: ModelId) => {
+    setSettings({ ...settings, model: modelId });
+  };
 
   return (
     <Dialog open={isOpen} onOpenChange={setIsOpen}>
@@ -79,22 +62,15 @@ export default function SettingsDialog({
             <Label className="text-lg font-semibold">Model</Label>
             <div className="space-y-2">
               {modelOptions.map((option) => (
-                <div
+                <button
                   key={option.id}
-                  className={`flex items-start space-x-3 rounded-lg border p-3 transition-colors cursor-pointer ${
+                  className={`flex items-start space-x-3 rounded-lg border p-3 transition-colors w-full text-left ${
                     settings.model === option.id
                       ? 'border-purple-500 bg-purple-500/20'
                       : 'border-gray-700 hover:bg-gray-800'
                   }`}
-                  onClick={() => setSettings({ ...settings, model: option.id })}
-                  onKeyDown={(e) => {
-                    if (e.key === 'Enter' || e.key === ' ') {
-                      setSettings({ ...settings, model: option.id });
-                    }
-                  }}
-                  // biome-ignore lint/a11y/useSemanticElements: design choice
-                  role="button"
-                  tabIndex={0}
+                  onClick={() => handleModelChange(option.id as ModelId)}
+                  type="button"
                 >
                   <div className="flex-shrink-0 mt-0.5">
                     {settings.model === option.id ? (
@@ -111,7 +87,7 @@ export default function SettingsDialog({
                       {option.description}
                     </p>
                   </div>
-                </div>
+                </button>
               ))}
             </div>
           </div>

@@ -33,8 +33,10 @@ export default function Header({
   };
 
   const handleInputKeyUp = (e: React.KeyboardEvent<HTMLInputElement>) => {
-    if (e.key === 'Enter' || e.key === ' ') {
+    if (e.key === 'Enter') {
       onPromptSubmit(prompt);
+    } else if (e.key === ' ') {
+      setPrompt(prompt);
     }
   };
 
