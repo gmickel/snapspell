@@ -2,6 +2,12 @@
 
 Welcome to SnapSpell, where your words transform into visual magic faster than you can say "Abracadabra"! 🚀
 
+
+
+https://github.com/user-attachments/assets/c7f6068b-f5a3-49d7-8f96-a50995fd5fb2
+
+
+
 ![SnapSpell Screenshot](public/screenshot.png)
 
 ## 🌟 What's This Wizardry?
